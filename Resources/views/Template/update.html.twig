@@ -1,0 +1,21 @@
+{% trans_default_domain 'admin' %}
+
+{% set subactive = "admin_page_list" %}
+
+{% extends 'PuzzleAdminPageBundle::layout_editor.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "cms.template.create"|trans }} {{ template.name }} {% endblock %}
+
+{% block mainsubtitle %} - {{ "cms.template.base"|trans }} {% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ url('admin_page_template_list') }}">{{ "cms.template.list"|trans }}</a></li>
+    <li class="active">{{ "cms.template.updated"|trans|capitalize }}</li>
+{% endblock %}
+
+{% block mainpage %}
+    <div class="col-md-10 col-md-offset-1">
+        {% include 'PuzzleAdminPageBundle:Template:form.html.twig' with { ' form' : form, 'template' : template } %}
+    </div>
+{% endblock %}

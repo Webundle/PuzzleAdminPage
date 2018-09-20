@@ -1,0 +1,18 @@
+{% trans_default_domain 'admin' %}
+
+{% if app.user.hasRole('ROLE_NEWSLETTER') or app.user.hasRole('ROLE_ADMIN')  %}
+    <li {% if active == "page" %}class="active"{% endif %}>
+        <a href="#">
+            <i class="{{ "cms.icon"|trans }}"></i>
+            <span>{{ "cms.base"|trans }}</span>
+        </a>
+        <ul>
+            <li {% if subactive == "admin_page_subscriber_list" %}class="active"{% endif %}>
+            <a href="{{ url('admin_page_list') }}">{{ "cms.page.base"|trans }}</a>
+            </li>
+            <li {% if subactive == "admin_page_template_list" %}class="active"{% endif %}>
+            <a href="{{ url('admin_page_template_list') }}">{{ "cms.template.base"|trans }}</a>
+            </li>
+        </ul>
+    </li>
+{% endif %}

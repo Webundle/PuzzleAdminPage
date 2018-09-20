@@ -1,0 +1,28 @@
+# Page
+cms:
+    base: 'Pages Statiques'
+    icon: 'icon-file-text'
+    role: 'Gérer les pages statiques'
+    template:
+        base: 'Modèles'
+        name: 'Nom'
+        content: 'Contenu'
+        list: 'Liste des modèles'
+        create: 'Ajouter un nouveau modèle'
+        update: 'Modifier le modèle'
+        delete: 'Etes-vous sûr de vouloir supprimer le modèle'
+    page:
+        base: 'Pages'
+        name: 'Nom'
+        content: 'Contenu'
+        picture: 'Image'
+        createdAt: 'Date de création'
+        updatedAt: 'Date d''édition'
+        template: 'Modèle'
+        parent: 'Parent'
+        list: 'Liste des pages'
+        show: 'Détails de la page'
+        create: 'Nouvelle page'
+        update: 'Modifier la page'
+        delete: 'Etes-vous sûr de vouloir supprimer la page'
+        delete_list: 'Etes-vous sûr de vouloir supprimer la sélection de pages'

@@ -1,0 +1,5 @@
+template:
+    resource: '@PuzzleAdminPageBundle/Resources/config/routing/template.yml'
+
+page:
+    resource: '@PuzzleAdminPageBundle/Resources/config/routing/page.yml'

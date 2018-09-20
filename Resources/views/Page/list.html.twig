@@ -1,0 +1,93 @@
+{% trans_default_domain 'admin' %}
+
+{% set subactive = "admin_page_list" %}
+
+{% extends 'PuzzleAdminPageBundle::layout_table.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "cms.page.list"|trans }} {% endblock %}
+
+{% block headingelements %}
+    <a href="{{ url('admin_page_create') }}" class="btn btn-primary btn-labeled">
+        <b><i class="icon-add"></i></b>
+        {{ "cms.page.create"|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">{{ "cms.page.list"|trans|capitalize }}</li>
+{% endblock %}
+{% block breadcrumbelements %}
+<ul class="breadcrumb-elements">
+    <li>
+        <a href="#" class="text-danger delete-list toggle-action hide">
+            <i class="icon-trash-alt"></i> {{ "button.delete_list"|trans }}
+        </a>
+        <input type="hidden" value="admin_page_delete" id="delete-route-name"/>
+    </li>
+</ul>
+{% endblock %}
+
+{% block mainpage %}
+    <div class="col-lg-12">
+        <div class="panel panel-flat">
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            {% if pages is not empty %}
+                                <a href="#" id="toggle-check">
+                                    <i class="icon-checkbox-unchecked toggle-icon" id="toggle-check-icon"></i>
+                                </a>
+                                <input type="hidden" value="{{ pages|length|default('0') }}" id="toggle-items-count">
+                                <input type="hidden" value="0" id="toggle-items-checked-count">
+                            {% endif %}
+                        </th>
+                        <th>{{ "cms.page.name"|trans }}</th>
+                        <th>{{ "cms.page.parent"|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages %}
+                        <tr class="toggleable" id="item-{{ page.id }}">
+                            <td>
+                                <a class="text-muted text-small text-left toggleable-btn-select" href="#">
+                                    <i class="icon-checkbox-unchecked toggle-icon toggle-item" id="toggle-item-{{ page.id }}"></i>
+                                </a>
+                            </td>
+                            <td>{{ page.name }}</td>
+                            <td>
+                                {% if page._embedded['parent'] is defined %}
+                                    <a href="{{ url('admin_page_show', { 'id' : page._embedded['parent']['id'] } ) }}">
+                                        {{ page._embedded['parent']['name'] }}
+                                    </a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-control">
+                                    <span class="icons-list toggleable-btn hide toggleable-btn-controls">
+                                        <a href="{{ url('admin_page_show', { 'id': page.id }) }}" class="mr-10">
+                                            <i class="icon-link"></i> 
+                                            {{ "button.show"|trans }}
+                                        </a>
+                                        <a href="{{ url('admin_page_update', { 'id': page.id }) }}" class="mr-10">
+                                            <i class="icon-pencil"></i> 
+                                            {{ "button.update"|trans }}
+                                        </a>
+                                        <a href="{{ url('admin_page_delete', {'id': page.id}) }}" data-toggle="modal" title="{{ "button.delete"|trans }}" class="delete-item" id="delete-item-{{ page.id }}">
+                                            <i class="icon-trash-alt text-danger"></i>
+                                        </a>
+                                        <input type="hidden" id="label-delete-item-{{ page.id }}" value="{{ page.name }}">
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

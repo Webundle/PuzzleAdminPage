@@ -1,0 +1,24 @@
+admin_page_template_list:
+    path:     /page-template/list
+    defaults: { _controller: 'PuzzleAdminPageBundle:Template:list' }
+    methods:  [GET]
+
+admin_page_template_create:
+    path:     /page-template/create
+    defaults: { _controller: 'PuzzleAdminPageBundle:Template:create' }
+    methods:  [GET, POST]
+
+admin_page_template_show:
+    path:     /page-template/{id}/show
+    defaults: { _controller: 'PuzzleAdminPageBundle:Template:show' }
+    methods:  [GET]
+
+admin_page_template_update:
+    path:     /page-template/{id}/update
+    defaults: { _controller: 'PuzzleAdminPageBundle:Template:update' }
+    methods:  [GET, POST]
+
+admin_page_template_delete:
+    path:     /page-template/{id}/delete
+    defaults: { _controller: 'PuzzleAdminPageBundle:Template:delete' }
+

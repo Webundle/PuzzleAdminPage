@@ -1,0 +1,24 @@
+admin_page_list:
+    path:     /page/list
+    defaults: { _controller: 'PuzzleAdminPageBundle:Page:list' }
+    methods:  [GET]
+
+admin_page_create:
+    path:     /page/create
+    defaults: { _controller: 'PuzzleAdminPageBundle:Page:create' }
+    methods:  [GET, POST]
+
+admin_page_show:
+    path:     /page/{id}/show
+    defaults: { _controller: 'PuzzleAdminPageBundle:Page:show' }
+    methods:  [GET]
+
+admin_page_update:
+    path:     /page/{id}/update
+    defaults: { _controller: 'PuzzleAdminPageBundle:Page:update' }
+    methods:  [GET, POST]
+
+admin_page_delete:
+    path:     /page/{id}/delete
+    defaults: { _controller: 'PuzzleAdminPageBundle:Page:delete' }
+
