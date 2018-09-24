@@ -173,15 +173,27 @@ class PageController extends Controller
      * @Security("has_role('ROLE_BLOG') or has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $id){
-        /** @var Puzzle\ConectBundle\Service\PuzzleAPIClient $apiClient */
-        $apiClient = $this->get('puzzle_connect.api_client');
-    	$response = $apiClient->push('delete', '/pages/'.$id);
-    	
-    	if ($request->isXmlHttpRequest()) {
-    	    return new JsonResponse($response);
-    	}
-    	
-    	return $this->redirectToRoute('admin_page_list');
+        try {
+            /** @var Puzzle\ConectBundle\Service\PuzzleAPIClient $apiClient */
+            $apiClient = $this->get('puzzle_connect.api_client');
+            $response = $apiClient->push('delete', '/pages/'.$id);
+            
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse($response);
+            }
+            
+            return $this->redirectToRoute('admin_page_list');
+        }catch (BadResponseException $e) {
+            /** @var EventDispatcher $dispatcher */
+            $dispatcher = $this->get('event_dispatcher');
+            $event  = $dispatcher->dispatch(ApiEvents::API_BAD_RESPONSE, new ApiResponseEvent($e, $request));
+            
+            if ($request->isXmlHttpRequest()) {
+                return $event->getResponse();
+            }
+            
+            return $this->redirectToRoute('admin_page_list');
+        }
     }
     
     
